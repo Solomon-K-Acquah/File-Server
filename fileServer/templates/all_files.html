@@ -1,0 +1,173 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+{% block title %}
+  <title>File Server | All files</title>
+{% endblock %}
+
+{% block content %}
+  <section class="py-5 mt-5">
+    <div class="col-md-8 text-center text-md-start mx-auto">
+      <div class="text-center">
+        <h1 class="display-4 fw-bold mb-5">Search through our range&nbsp;<span class="underline">Files</span>.</h1>
+        <p class="fs-5 text-muted mb-5">We have limitless count of files all for you. Enjoy your search</p>
+        <form class="d-flex justify-content-center flex-wrap" method="post">
+          <div class="shadow-lg mb-3">
+            <input class="form-control" type="email" name="search" placeholder="Search......" />
+          </div>
+          <div class="shadow-lg mb-3">
+            <button class="btn btn-primary" type="submit">Search</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section></section>
+  <section class="py-5">
+    <h5 class="display-6 fw-bold text-center pb-4 mb-4">All&nbsp;<span class="underline">files</span></h5>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 align-self-center">
+          <p class="text-center text-muted">Feel free to choose, read more and download the file of your choice and that satifies your need</p>
+        </div>
+      </div>
+    </div>
+    <div class="container py-4 py-xl-5">
+      <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+        <div class="col">
+          <div>
+            <img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="{% static 'fileServer/assets/img/illustrations/ranking.svg' %}" />
+            <div class="py-4">
+              <h4 class="fw-bold">Title</h4>
+              <p class="text-muted">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
+              <div class="btn-group" role="group"></div><a class="fw-bold link-primary" href="#">
+                Learn more&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-narrow-right fs-3">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <line x1="15" y1="16" x2="19" y2="12"></line>
+                  <line x1="15" y1="8" x2="19" y2="12"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div>
+            <img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="{% static 'fileServer/assets/img/illustrations/javascript.svg' %}" />
+            <div class="py-4">
+              <h4 class="fw-bold">Title</h4>
+              <p class="text-muted">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
+              <div class="btn-group" role="group"></div><a class="fw-bold link-primary" href="#">
+                Learn more&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-narrow-right fs-3">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <line x1="15" y1="16" x2="19" y2="12"></line>
+                  <line x1="15" y1="8" x2="19" y2="12"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div>
+            <img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="{% static 'fileServer/assets/img/illustrations/data-management.svg' %}" />
+            <div class="py-4">
+              <h4 class="fw-bold">Title</h4>
+              <p class="text-muted">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
+              <div class="btn-group" role="group"></div><a class="fw-bold link-primary" href="#">
+                Learn more&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-narrow-right fs-3">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <line x1="15" y1="16" x2="19" y2="12"></line>
+                  <line x1="15" y1="8" x2="19" y2="12"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div>
+            <img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="{% static 'fileServer/assets/img/illustrations/ranking.svg' %}" />
+            <div class="py-4">
+              <h4 class="fw-bold">Title</h4>
+              <p class="text-muted">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
+              <div class="btn-group" role="group"></div><a class="fw-bold link-primary" href="#">
+                Learn more&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-narrow-right fs-3">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <line x1="15" y1="16" x2="19" y2="12"></line>
+                  <line x1="15" y1="8" x2="19" y2="12"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div>
+            <img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="{% static 'fileServer/assets/img/illustrations/meeting.svg' %}" />
+            <div class="py-4">
+              <h4 class="fw-bold">Title</h4>
+              <p class="text-muted">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
+              <div class="btn-group" role="group"></div><a class="fw-bold link-primary" href="#">
+                Learn more&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-narrow-right fs-3">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <line x1="15" y1="16" x2="19" y2="12"></line>
+                  <line x1="15" y1="8" x2="19" y2="12"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div>
+            <img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="{% static 'fileServer/assets/img/illustrations/presentation.svg' %}" />
+            <div class="py-4">
+              <h4 class="fw-bold">Title</h4>
+              <p class="text-muted">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
+              <div class="btn-group" role="group"></div><a class="fw-bold link-primary" href="#">
+                Learn more&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-narrow-right fs-3">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <line x1="15" y1="16" x2="19" y2="12"></line>
+                  <line x1="15" y1="8" x2="19" y2="12"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-4 col-lg-5 offset-lg-0 text-center d-lg-flex align-self-center">
+          <nav class="justify-content-center align-items-center align-content-center">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">2</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">3</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">4</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">5</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
