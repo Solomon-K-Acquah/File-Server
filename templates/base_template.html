@@ -18,16 +18,16 @@
   <body>
     <nav class="navbar navbar-light navbar-expand-md fixed-top navbar-shrink py-3" id="mainNav">
       <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="{% url 'home_page' %}"><span>File Server</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}"><span>File Server</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navcol-1">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="{% url 'home_page' %}">Home</a>
+              <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'files_page' %}">All Files</a>
+              <a class="nav-link {% if request.path == '/files/' %}active{% endif %}" href="{% url 'files' %}">All Files</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item {% if request.path == '/categories/' %}active{% endif %} dropdown">
               <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Categories</a>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="details.html">Details Page</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a>

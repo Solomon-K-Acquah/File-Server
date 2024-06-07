@@ -1,0 +1,63 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Details |</title>
+{% endblock %}
+
+{% block content %}
+  <section class="py-5 mt-5">
+    <section class="py-4 py-xl-5">
+      <div class="container">
+        <div class="text-white bg-primary border rounded border-0 border-primary d-flex flex-column justify-content-between flex-lg-row p-4 p-md-5">
+          <div class="pb-2 pb-lg-1">
+            <h2 class="fw-bold mb-2">Download this file</h2>
+            <p class="mb-0">Click on the button to download the file directly to your PC</p>
+          </div>
+          <div class="my-2">
+            <a class="btn btn-light fs-5 py-2 px-4" role="button" href="#">Dowload Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="container py-5" style="margin-top: 0;">
+      <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
+        <div class="col mb-5">
+          <img class="rounded img-fluid" src="{{ file.image.url }}" />
+        </div>
+        <div class="col d-md-flex align-items-md-end align-items-lg-center mb-5">
+          <div>
+            <h5 class="fs-3 fw-bold mb-4">{{ file.title }}</h5>
+            <p class="text-muted mb-4">{{ file.description }}</p>
+            <p class="text-muted text-sm display-10">
+              <b>Date Uploaded:</b> {{ file.upload_date|date }} &nbsp;&nbsp;&nbsp; <span class="pl-4"><b>Dowloads:</b> 12</span>
+            </p>
+            <a class="fw-bold link-primary mb-3" href="#">Download options</a>
+            <div class="d-flex mt-3">
+              <a href="">
+                <div class="bs-icon-md bs-icon-rounded bs-icon-secondary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon me-2" data-toggle="tooltip" title="Download to PC">
+                  <svg class="icon icon-tabler icon-tabler-file-download" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                    <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
+                    <line x1="12" y1="11" x2="12" y2="17"></line>
+                    <polyline points="9 14 12 17 15 14"></polyline>
+                  </svg>
+                </div>
+              </a>
+              <a href="">
+                <div class="bs-icon-md bs-icon-rounded bs-icon-secondary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon me-2" data-toggle="tooltip" title="Send to email">
+                  <svg class="icon icon-tabler icon-tabler-mail" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                    <polyline points="3 7 12 13 21 7"></polyline>
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
