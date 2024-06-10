@@ -9,8 +9,8 @@ class File(models.Model):
     file = models.FileField(null=True, blank=True, upload_to='files/')
     image = models.ImageField(null=True, blank=True, upload_to='images/')
     upload_date = models.DateTimeField(auto_now=True)
-    download_count = models.IntegerField(null=True, blank=True)
-    email_count = models.IntegerField(null=True, blank=True)
+    download_count = models.PositiveIntegerField(default=0)
+    email_count = models.PositiveIntegerField(default=0)
     
     # set model object name to it title
     def __str__(self):

@@ -1,6 +1,12 @@
-from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import render
+from fileinput import filename
+import os
+from traceback import print_tb
+from urllib import response
+from django.http import FileResponse, Http404, HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 
+from fileServer import models
 from fileServer.models import File
 
 # Create your views here.
@@ -33,3 +39,23 @@ def file_details(request, slug):
     
     context = {'file' : file}
     return render(request, 'fileServer/details.html', context)
+
+# function for downloading file to the PC
+def download_file(request, slug):
+    file = get_object_or_404(File, slug=slug)
+    file_path = file.file.path
+    
+    if os.path.exists(file_path):
+        
+        # Increment download count by one
+        file.download_count += 1
+        file.save()
+        
+        file.refresh_from_db()
+        
+        return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=os.path.basename(file_path))
+    else:
+        return Http404('File not found')
+        
+    
+    
