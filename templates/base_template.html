@@ -18,7 +18,11 @@
   <body>
     <nav class="navbar navbar-light navbar-expand-md fixed-top navbar-shrink py-3" id="mainNav">
       <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}"><span>File Server</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}"><span>File Server</span></a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+          <span class="visually-hidden">Toggle navigation</span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navcol-1">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item">
@@ -27,13 +31,9 @@
             <li class="nav-item">
               <a class="nav-link {% if request.path == '/files/' %}active{% endif %}" href="{% url 'files' %}">All Files</a>
             </li>
-            <li class="nav-item {% if request.path == '/categories/' %}active{% endif %} dropdown">
-              <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Categories</a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="details.html">Details Page</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a>
-              </div>
-            </li>
-          </ul><a class="btn btn-primary shadow" role="button" data-bss-hover-animate="pulse" href="login.html" style="margin-right: 12px;background: rgb(231,181,1);border-style: none;">Login</a><a class="btn btn-primary shadow" role="button" data-bss-hover-animate="pulse" href="signup.html">Sign up</a>
+          </ul>
+          <a class="btn btn-primary shadow" role="button" data-bss-hover-animate="pulse" href="login.html" style="margin-right: 12px;background: rgb(231,181,1);border-style: none;">Login</a>
+          <a class="btn btn-primary shadow" role="button" data-bss-hover-animate="pulse" href="signup.html">Sign up</a>
         </div>
       </div>
     </nav>

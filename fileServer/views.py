@@ -1,13 +1,8 @@
-from fileinput import filename
 import os
-from traceback import print_tb
-from urllib import response
-from django.http import FileResponse, Http404, HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
-
-from fileServer import models
-from fileServer.models import File
+from fileServer.models import Category, File
+from django.db.models import Q
 
 # Create your views here.
 
@@ -27,7 +22,10 @@ def all_files(request):
     # fetch all the file objects in descending order
     files = File.objects.all().order_by('-id')
     
-    context = {'files' : files}
+    # fetch all categories
+    categories = Category.objects.all()
+    
+    context = {'files' : files, 'categories' : categories}
     return render(request, 'fileServer/all_files.html', context)
 
 
@@ -39,6 +37,7 @@ def file_details(request, slug):
     
     context = {'file' : file}
     return render(request, 'fileServer/details.html', context)
+
 
 # function for downloading file to the PC
 def download_file(request, slug):
@@ -56,6 +55,36 @@ def download_file(request, slug):
         return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=os.path.basename(file_path))
     else:
         return Http404('File not found')
-        
     
+
+# show file based on categories
+def show_file_by_category(request, slug):
+    
+    category = get_object_or_404(Category, slug = slug)
+    files = File.objects.filter(category_id = category).order_by('-id')
+    
+    categories = Category.objects.all()
+    
+    context = {'files' : files, 'categories' : categories}
+    return render(request, 'fileServer/all_files.html', context)
+
+
+# function for search functionality
+def search_file(request):
+    # intializing search query to an empty string at the initial stage
+    search_query = ''
+    
+    # assign the value of the search input field to the search_query
+    if request.GET.get('search'):
+        search_query = request.GET.get('search')
+        
+    # get the files according to the search_query
+    files = File.objects.filter(Q(title__icontains = search_query) | 
+                                Q(description__icontains = search_query) | 
+                                Q(slug__icontains = search_query))
+    
+    categories = Category.objects.all()
+    
+    context = {'files' : files, 'categories' : categories, 'search_query' : search_query}
+    return render(request, 'fileServer/all_files.html', context)
     
