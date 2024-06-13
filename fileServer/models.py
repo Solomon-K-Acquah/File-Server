@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ValidationError
 from django.utils.text import slugify
 
 # model class for file
@@ -15,13 +16,18 @@ class Category(models.Model):
         if not self.id:
             self.slug = slugify(self.name)
         return super(Category, self).save(*args,**kwargs)
-    
 
+# file max size validator
+def validate_file_size(value):
+    limit = 5 * 1024 * 1024  # 5 MB limit
+    if value.size > limit:
+        raise ValidationError(f"Max file size is 5MB")
+    
 class File(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     description = models.TextField()
-    file = models.FileField(null=True, blank=True, upload_to='files/')
+    file = models.FileField(null=True, blank=True, upload_to='files/', validators=[validate_file_size])
     image = models.ImageField(null=True, blank=True, upload_to='images/')
     upload_date = models.DateTimeField(auto_now=True)
     download_count = models.PositiveIntegerField(default=0)

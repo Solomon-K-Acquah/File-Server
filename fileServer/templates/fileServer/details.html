@@ -30,7 +30,7 @@
             <h5 class="fs-3 fw-bold mb-4">{{ file.title }}</h5>
             <p class="text-muted mb-4">{{ file.description }}</p>
             <p class="text-muted text-sm display-10">
-              <b>Date Uploaded:</b> {{ file.upload_date|date }} &nbsp;&nbsp;&nbsp; <span class="pl-4"><b>Dowloads:</b> {{ file.download_count }}</span>
+              <b>Date Uploaded:</b> {{ file.upload_date|date }} &nbsp;&nbsp;&nbsp; <span class="pl-4"><b>Dowloads:</b> {{ total_downloads }}</span>
             </p>
             <a class="fw-bold link-primary mb-3" href="#">Download options</a>
             <div class="d-flex mt-3">
@@ -45,7 +45,7 @@
                   </svg>
                 </div>
               </a>
-              <a href="">
+              <a href="{% url 'send_file' file.slug %}">
                 <div class="bs-icon-md bs-icon-rounded bs-icon-secondary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon me-2" data-toggle="tooltip" title="Send to email">
                   <svg class="icon icon-tabler icon-tabler-mail" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

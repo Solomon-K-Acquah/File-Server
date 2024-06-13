@@ -1,0 +1,35 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+{% block title %}
+  <title>File Server | Email {{ file.title }}</title>
+{% endblock %}
+
+{% block content %}
+  <section class="py-4 py-md-5 my-5">
+    <div class="container py-md-5">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <img class="img-fluid w-100" src="{{ file.image.url }}" />
+        </div>
+        <div class="col-md-8 col-xl-8 text-center text-md-start">
+          <h2 class="display-6 fw-bold mb-5"><span class="underline pb-1"><strong>Send to</strong></span></h2>
+          <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+              {% for field in email_form %}
+                {{ email_form.errors }}
+              {% endfor %}
+
+              {{ email_form.email }}
+              <small class="text-muted fst-italic">You can change the email if you wish to send it to another email other than your regiestered email.</small>
+            </div>
+            <div class="mb-5">
+              <button class="btn btn-primary shadow" data-bss-hover-animate="pulse" type="submit">Send File</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

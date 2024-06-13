@@ -1,8 +1,13 @@
 import os
-from django.http import FileResponse, Http404
-from django.shortcuts import get_object_or_404, render
+from django.conf import settings
+from django.http import FileResponse, Http404, HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from fileServer.form import SendEmailForm
 from fileServer.models import Category, File
 from django.db.models import Q
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage, send_mail
+from django.utils.html import strip_tags
 
 # Create your views here.
 
@@ -35,7 +40,10 @@ def file_details(request, slug):
     # fetch the detail of a single file or selected file
     file = File.objects.get(slug = slug)
     
-    context = {'file' : file}
+    # get file total download, both direct and via email
+    total_downloads = file.email_count + file.download_count
+    
+    context = {'file' : file, 'total_downloads' : total_downloads}
     return render(request, 'fileServer/details.html', context)
 
 
@@ -87,4 +95,38 @@ def search_file(request):
     
     context = {'files' : files, 'categories' : categories, 'search_query' : search_query}
     return render(request, 'fileServer/all_files.html', context)
+
+
+# send document to email
+def email_document(request, slug):
+    file = get_object_or_404(File, slug=slug)
+    
+    # get the data and send to email
+    if request.method == 'POST':
+        email_form = SendEmailForm(request.POST)
+        if email_form.is_valid():
+            email = email_form.cleaned_data['email']
+            subject = 'Your requsted file'
+            message = render_to_string('fileServer/message.html', {'file' : file})
+            plain_message = strip_tags(message)
+            email_message = EmailMessage(subject, plain_message, settings.EMAIL_HOST_USER, [email])
+            email_message.attach_file(file.file.path)
+            email_message.send()
+            
+            # increase email_count by 1 after sending the file
+            file.email_count += 1
+            file.save()
+            
+            
+            return redirect('thank_you')
+    else:
+        email_form = SendEmailForm()
+    
+    context = {'email_form' : email_form, 'file' : file}
+    
+    return render(request, 'fileServer/email_document.html', context)
+
+# thank you page function
+def thank_you(request):
+    return render(request, 'fileServer/thank_you.html')
     
