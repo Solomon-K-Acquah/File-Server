@@ -1,8 +1,9 @@
 from django.db import models
 from django.forms import ValidationError
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 
-# model class for file
+# model class for category-------------------------------------------
 class Category(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200 ,unique=True)
@@ -17,6 +18,8 @@ class Category(models.Model):
             self.slug = slugify(self.name)
         return super(Category, self).save(*args,**kwargs)
 
+
+# model class for file-------------------------------------------
 # file max size validator
 def validate_file_size(value):
     limit = 5 * 1024 * 1024  # 5 MB limit
@@ -43,3 +46,12 @@ class File(models.Model):
         if not self.id:
             self.slug = slugify(self.title)
         return super(File, self).save(*args,**kwargs)
+
+# model class for Download-------------------------------------------
+class Download(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    file = models.ForeignKey(File, on_delete=models.CASCADE, blank=True, null=True)
+    download_timestamp = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f'{self.user.username} downloaded {self.file.title}'

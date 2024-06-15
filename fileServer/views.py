@@ -2,12 +2,13 @@ import os
 from django.conf import settings
 from django.http import FileResponse, Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from fileServer.form import SendEmailForm
-from fileServer.models import Category, File
+from fileServer.form import NewUserForm, SendEmailForm
+from fileServer.models import Category, Download, File
 from django.db.models import Q
 from django.template.loader import render_to_string
-from django.core.mail import EmailMessage, send_mail
+from django.core.mail import EmailMessage
 from django.utils.html import strip_tags
+from django.contrib.auth import login
 
 # Create your views here.
 
@@ -58,6 +59,10 @@ def download_file(request, slug):
         file.download_count += 1
         file.save()
         
+        # get the user and file records to the downloads table
+        Download.objects.create(user=request.user, file=file)
+        
+        # refresh the database
         file.refresh_from_db()
         
         return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=os.path.basename(file_path))
@@ -126,7 +131,23 @@ def email_document(request, slug):
     
     return render(request, 'fileServer/email_document.html', context)
 
+
 # thank you page function
 def thank_you(request):
     return render(request, 'fileServer/thank_you.html')
+
+
+# register new user function
+def register_user(request):
+    if request.method == 'POST':
+        register_form = NewUserForm(request.POST)
+        if register_form.is_valid():
+            user = register_form.save()
+            login(request, user)
+            return redirect('/')
+    else:   
+        register_form = NewUserForm()
+    
+    context = {'register_form' : register_form}
+    return render(request, 'registration/registration.html', context)
     

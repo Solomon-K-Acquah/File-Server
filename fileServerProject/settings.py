@@ -33,14 +33,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'fileServer.apps.FileserverConfig',
-    # 'widget_tweaks',
+    'django.contrib.admin',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +135,6 @@ EMAIL_HOST_PASSWORD = '359b828921cd80'
 EMAIL_PORT = '2525'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '/accounts/login/'

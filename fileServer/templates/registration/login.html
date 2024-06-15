@@ -1,0 +1,54 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+{% block title %}
+  <title>File Server | Login</title>
+{% endblock %}
+
+{% block content %}
+  <section class="py-4 py-md-5 my-5">
+    <div class="container py-md-5">
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <img class="img-fluid w-100" src="{% static 'fileServer/assets/img/illustrations/register.svg' %}" />
+        </div>
+        <div class="col-md-6 col-xl-4 text-center text-md-start">
+          <h2 class="display-6 fw-bold mb-5"><span class="underline pb-1"><strong>Login</strong></span></h2>
+
+          <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+              {% for errors in form.non_field_errors %}
+                <div class="text-danger text-sm">
+                  <p>{{ errors }}</p>
+                </div>
+              {% endfor %}
+            {% endif %}
+
+            <div class="mb-3">
+              <input class="shadow-sm form-control" type="text" name="{{ form.username.name }}" placeholder="Username" required />
+            </div>
+            <div class="mb-3">
+              <input class="shadow-sm form-control" type="password" name="{{ form.password.name }}" placeholder="Password" required />
+            </div>
+            <div class="mb-5">
+              <button class="btn btn-primary shadow" data-bss-hover-animate="pulse" type="submit">Login</button>
+              <a class="text-center" href="reset_password.html" style="margin-right: 0px;color: rgb(17,94,233);margin-left: 30px;max-height: 1px;min-height: 1px;width: 2px;">Forgot Password</a>
+            </div>
+            <p class="text-muted">
+              You don't have an account? <a href="">
+                Sign up&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-narrow-right">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <line x1="15" y1="16" x2="19" y2="12"></line>
+                  <line x1="15" y1="8" x2="19" y2="12"></line>
+                </svg>
+              </a>&nbsp;
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

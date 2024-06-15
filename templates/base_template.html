@@ -32,8 +32,15 @@
               <a class="nav-link {% if request.path == '/files/' %}active{% endif %}" href="{% url 'files' %}">All Files</a>
             </li>
           </ul>
-          <a class="btn btn-primary shadow" role="button" data-bss-hover-animate="pulse" href="login.html" style="margin-right: 12px;background: rgb(231,181,1);border-style: none;">Login</a>
-          <a class="btn btn-primary shadow" role="button" data-bss-hover-animate="pulse" href="signup.html">Sign up</a>
+          {% if user.is_authenticated %}
+            <form action="{% url 'logout' %}" method="POST">
+              {% csrf_token %}
+              <button class="btn btn-primary shadow" role="button" data-bss-hover-animate="pulse" style="margin-right: 12px;background: rgb(231,181,1);border-style: none;">Logout</button>
+            </form>
+          {% else %}
+            <a class="btn btn-primary shadow" role="button" data-bss-hover-animate="pulse" href="{% url 'login' %}" style="margin-right: 12px;background: rgb(231,181,1);border-style: none;">Login</a>
+            <a class="btn btn-primary shadow" role="button" data-bss-hover-animate="pulse" href="{% url 'register' %}">Sign up</a>
+          {% endif %}
         </div>
       </div>
     </nav>
