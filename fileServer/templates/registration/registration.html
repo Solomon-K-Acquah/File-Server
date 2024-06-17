@@ -45,10 +45,10 @@
             </div>
 
             <div class="mb-3">
-              {{ register_form.password1 }}
-              {% if register_form.password1.errors %}
+              {{ register_form.password }}
+              {% if register_form.password.errors %}
                 <div class="text-danger text-sm">
-                  <p>{{ register_form.password1.errors.as_text }}</p>
+                  <p>{{ register_form.password.errors.as_text }}</p>
                 </div>
               {% endif %}
             </div>

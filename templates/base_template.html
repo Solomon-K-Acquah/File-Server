@@ -33,9 +33,10 @@
             </li>
           </ul>
           {% if user.is_authenticated %}
+            <h6 class="display-6 ms-auto" style="font-size: 18.8773px;margin: 0px;margin-bottom: 0px;margin-right: 20px;"><b>User:</b> {{ user.username }}</h6>
             <form action="{% url 'logout' %}" method="POST">
               {% csrf_token %}
-              <button class="btn btn-primary shadow" role="button" data-bss-hover-animate="pulse" style="margin-right: 12px;background: rgb(231,181,1);border-style: none;">Logout</button>
+              <button class="btn btn-primary" role="button" data-bss-hover-animate="pulse" style="margin-right: 12px;background: rgb(231,181,1);border-style: none;">Logout</button>
             </form>
           {% else %}
             <a class="btn btn-primary shadow" role="button" data-bss-hover-animate="pulse" href="{% url 'login' %}" style="margin-right: 12px;background: rgb(231,181,1);border-style: none;">Login</a>
@@ -53,58 +54,49 @@
       <footer class="text-white bg-primary">
         <div class="container py-4 py-lg-5">
           <div class="row row-cols-2 row-cols-md-4">
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-6 pe-md-5">
               <div class="fw-bold d-flex align-items-center mb-2">
-                <span>Brand</span>
+                <span>File Server</span>
               </div>
-              <p class="text-light">Sem eleifend donec molestie, integer quisque orci aliquam.</p>
+              <p class="text-light">Want a file through the fast and easy way? You have lot of them at your disposal</p>
             </div>
             <div class="col-sm-4 col-md-3 text-lg-start d-flex flex-column">
-              <h3 class="fs-6 fw-bold">Services</h3>
+              <h3 class="fs-6 fw-bold">Site Links</h3>
               <ul class="list-unstyled">
                 <li>
-                  <a class="link-light" href="#">Web design</a>
+                  <a class="link-light" href="{% url 'home' %}">Home</a>
                 </li>
                 <li>
-                  <a class="link-light" href="#">Development</a>
-                </li>
-                <li>
-                  <a class="link-light" href="#">Hosting</a>
+                  <a class="link-light" href="{% url 'files' %}">All Files</a>
                 </li>
               </ul>
             </div>
             <div class="col-sm-4 col-md-3 text-lg-start d-flex flex-column">
-              <h3 class="fs-6 fw-bold">About</h3>
+              <h3 class="fs-6 fw-bold">Register</h3>
               <ul class="list-unstyled">
-                <li>
-                  <a class="link-light" href="#">Company</a>
-                </li>
-                <li>
-                  <a class="link-light" href="#">Team</a>
-                </li>
-                <li>
-                  <a class="link-light" href="#">Legacy</a>
-                </li>
-              </ul>
-            </div>
-            <div class="col-sm-4 col-md-3 text-lg-start d-flex flex-column">
-              <h3 class="fs-6 fw-bold">Careers</h3>
-              <ul class="list-unstyled">
-                <li>
-                  <a class="link-light" href="#">Job openings</a>
-                </li>
-                <li>
-                  <a class="link-light" href="#">Employee success</a>
-                </li>
-                <li>
-                  <a class="link-light" href="#">Benefits</a>
-                </li>
+                {% if user.is_authenticated %}
+                  <li class="pt-2">
+                    <form action="{% url 'logout' %}" method="POST">
+                      {% csrf_token %}
+                      <button class="text-dark bg-warning p-2" type="submit" style="background-color: rebeccapurple; border: none;">Logout</button>
+                    </form>
+                  </li>
+                {% else %}
+                  <li>
+                    <a class="link-light" href="{% url 'login' %}">Login</a>
+                  </li>
+                  <li>
+                    <a class="link-light" href="{% url 'register' %}">Signup</a>
+                  </li>
+                {% endif %}
               </ul>
             </div>
           </div>
           <hr />
           <div class="text-muted d-flex justify-content-between align-items-center pt-3">
-            <p class="text-white mb-0">Copyright © 2024 Brand</p>
+            <p class="text-white mb-0">
+              Copyright ©{% now ' Y ' %}File Server
+            </p>
             <ul class="list-inline text-white mb-0">
               <li class="list-inline-item">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">

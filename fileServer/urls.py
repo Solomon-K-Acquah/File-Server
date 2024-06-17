@@ -11,7 +11,5 @@ urlpatterns = [
     path('search/', views.search_file, name='search'),
     path('send_file/<slug:slug>', views.email_document, name='send_file'),
     path('accounts/register/', views.register_user, name='register'),
-    path('thank_you/', views.thank_you, name='thank_you'),
-    # path('accounts/login/', views.login_user, name='login'),
-    # path('logout/', views.logout_user, name='logout')
+    path('thank_you/', views.thank_you, name='thank_you')
 ]

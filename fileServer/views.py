@@ -3,7 +3,7 @@ from django.conf import settings
 from django.http import FileResponse, Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from fileServer.form import NewUserForm, SendEmailForm
-from fileServer.models import Category, Download, File
+from fileServer.models import Category, Download, EmailLog, File
 from django.db.models import Q
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
@@ -122,6 +122,8 @@ def email_document(request, slug):
             file.email_count += 1
             file.save()
             
+            # get the user and file records to the downloads table
+            EmailLog.objects.create(user=request.user, file=file, recipient_email=email)
             
             return redirect('thank_you')
     else:
