@@ -33,14 +33,14 @@
             </li>
           </ul>
           {% if user.is_authenticated %}
-            <h6 class="display-6 ms-auto" style="font-size: 18.8773px;margin: 0px;margin-bottom: 0px;margin-right: 20px;"><b>User:</b> {{ user.username }}</h6>
-            <form action="{% url 'logout' %}" method="POST">
+            <h6 class="display-7 ms-auto text-black-50" style="font-size: 16px;margin: 0px;margin-bottom: 0px;margin-right: 20px;"><b>User:</b> {{ user.username }}</h6>
+            <form action="{% url 'account_logout' %}" method="GET">
               {% csrf_token %}
               <button class="btn btn-primary" role="button" data-bss-hover-animate="pulse" style="margin-right: 12px;background: rgb(231,181,1);border-style: none;">Logout</button>
             </form>
           {% else %}
-            <a class="btn btn-primary shadow" role="button" data-bss-hover-animate="pulse" href="{% url 'login' %}" style="margin-right: 12px;background: rgb(231,181,1);border-style: none;">Login</a>
-            <a class="btn btn-primary shadow" role="button" data-bss-hover-animate="pulse" href="{% url 'register' %}">Sign up</a>
+            <a class="btn btn-primary shadow" role="button" data-bss-hover-animate="pulse" href="{% url 'account_login' %}" style="margin-right: 12px;background: rgb(231,181,1);border-style: none;">Login</a>
+            <a class="btn btn-primary shadow" role="button" data-bss-hover-animate="pulse" href="{% url 'signup' %}">Sign up</a>
           {% endif %}
         </div>
       </div>
@@ -76,17 +76,17 @@
               <ul class="list-unstyled">
                 {% if user.is_authenticated %}
                   <li class="pt-2">
-                    <form action="{% url 'logout' %}" method="POST">
+                    <form action="" method="POST">
                       {% csrf_token %}
                       <button class="text-dark bg-warning p-2" type="submit" style="background-color: rebeccapurple; border: none;">Logout</button>
                     </form>
                   </li>
                 {% else %}
                   <li>
-                    <a class="link-light" href="{% url 'login' %}">Login</a>
+                    <a class="link-light" href="">Login</a>
                   </li>
                   <li>
-                    <a class="link-light" href="{% url 'register' %}">Signup</a>
+                    <a class="link-light" href="">Signup</a>
                   </li>
                 {% endif %}
               </ul>

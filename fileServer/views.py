@@ -1,14 +1,16 @@
 import os
 from django.conf import settings
-from django.http import FileResponse, Http404, HttpResponse
+from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
-from fileServer.form import NewUserForm, SendEmailForm
+from fileServer.form import CustomSignupForm, SendEmailForm
 from fileServer.models import Category, Download, EmailLog, File
 from django.db.models import Q
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.utils.html import strip_tags
+from allauth.account.views import SignupForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -135,21 +137,44 @@ def email_document(request, slug):
 
 
 # thank you page function
+@login_required
 def thank_you(request):
     return render(request, 'fileServer/thank_you.html')
 
 
-# register new user function
-def register_user(request):
+def signup_view(request):
     if request.method == 'POST':
-        register_form = NewUserForm(request.POST)
-        if register_form.is_valid():
-            user = register_form.save()
-            login(request, user)
+        form = CustomSignupForm(request.POST)
+        if form.is_valid():
+            form.save(request)
             return redirect('/')
-    else:   
-        register_form = NewUserForm()
+    else:
+        form = CustomSignupForm()
     
-    context = {'register_form' : register_form}
-    return render(request, 'registration/registration.html', context)
+    return render(request, 'account/signup.html', {'form': form})
+
+# def signup_view(request):
+#     if request.method == 'POST':
+#         form = CustomSignupForm(request.POST)
+#         if form.is_valid():
+#             form.save(request)
+#             return redirect('/')
+#     else:
+#         form = CustomSignupForm()
+    
+#     return render(request, 'account/signup.html', {'form':form})
+        
+# register new user function
+# def register_user(request):
+#     if request.method == 'POST':
+#         register_form = NewUserForm(request.POST)
+#         if register_form.is_valid():
+#             user = register_form.save()
+#             login(request, user)
+#             return redirect('/')
+#     else:   
+#         register_form = NewUserForm()
+    
+#     context = {'register_form' : register_form}
+#     return render(request, 'registration/registration.html', context)
     

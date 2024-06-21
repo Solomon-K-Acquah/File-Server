@@ -22,13 +22,13 @@
                   </p>
                   <div class="my-3">
                     {% if user.is_authenticated %}
-                      <form action="{% url 'logout' %}" method="POST">
+                      <form action="" method="POST">
                         {% csrf_token %}
                         <button class="btn btn-warning btn-lg me-2" type="submit" data-bss-hover-animate="pulse" style="background: rgb(231,181,1);">Logout</button>
                       </form>
                     {% else %}
-                      <a class="btn btn-warning btn-lg me-2" role="button" data-bss-hover-animate="pulse" href="{% url 'login' %}" style="background: rgb(231,181,1);">Login</a>
-                      <a class="btn btn-light btn-lg" role="button" data-bss-hover-animate="pulse" href="{% url 'register' %}">Sign up</a>
+                      <a class="btn btn-warning btn-lg me-2" role="button" data-bss-hover-animate="pulse" href="" style="background: rgb(231,181,1);">Login</a>
+                      <a class="btn btn-light btn-lg" role="button" data-bss-hover-animate="pulse" href="">Sign up</a>
                     {% endif %}
                   </div>
                 </div>
@@ -42,7 +42,7 @@
       </section>
     </div>
   </header>
-  {% if file.count > 0 %}
+  {% if files.count > 0 %}
     <section style="margin-top: 41px;">
       <div class="container">
         <div class="row">
@@ -59,7 +59,7 @@
                 <img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="{{ file.image.url }}" />
                 <div class="py-4">
                   <h4 class="fw-bold">{{ file.title }}</h4>
-                  <p class="text-muted">{{ file.description|truncatechars:100 }}</p>
+                  <p class="text-muted">{{ file.description|truncatechars:50 }}</p>
                   <div class="btn-group" role="group"></div><a class="fw-bold link-primary" href="{% url 'details' file.slug %}">
                     View more&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-narrow-right fs-3">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
