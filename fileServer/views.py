@@ -2,15 +2,15 @@ import os
 from django.conf import settings
 from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
-from fileServer.form import CustomSignupForm, SendEmailForm
+from fileServer.form import SendEmailForm
 from fileServer.models import Category, Download, EmailLog, File
 from django.db.models import Q
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.utils.html import strip_tags
-from allauth.account.views import SignupForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -29,11 +29,19 @@ def all_files(request):
     
     # fetch all the file objects in descending order
     files = File.objects.all().order_by('-id')
+    paginator = Paginator(files, 10)     # 10 files per page
+    
+    page_number = request.GET.get('page')   # get the page number
+    page_objs = paginator.get_page(page_number)
     
     # fetch all categories
     categories = Category.objects.all()
     
-    context = {'files' : files, 'categories' : categories}
+    context = {
+        'page_objs' : page_objs,
+        'paginator' : paginator,
+        'categories' : categories
+        }
     return render(request, 'fileServer/all_files.html', context)
 
 
@@ -75,12 +83,23 @@ def download_file(request, slug):
 # show file based on categories
 def show_file_by_category(request, slug):
     
+    # fetch files based on the categoteries with pagination
     category = get_object_or_404(Category, slug = slug)
     files = File.objects.filter(category_id = category).order_by('-id')
     
+    paginator = Paginator(files, 10)     # 10 files per page
+    page_number = request.GET.get('page')   # get page number
+    
+    page_objs = paginator.get_page(page_number)
+    
+    # fetch all categories
     categories = Category.objects.all()
     
-    context = {'files' : files, 'categories' : categories}
+    context = {
+        'page_objs' : page_objs, 
+        'paginator' : paginator,
+        'categories' : categories
+        }
     return render(request, 'fileServer/all_files.html', context)
 
 
@@ -93,14 +112,26 @@ def search_file(request):
     if request.GET.get('search'):
         search_query = request.GET.get('search')
         
-    # get the files according to the search_query
+    # get the files according to the search_query with pagination
     files = File.objects.filter(Q(title__icontains = search_query) | 
                                 Q(description__icontains = search_query) | 
                                 Q(slug__icontains = search_query))
     
+    paginator = Paginator(files, 10)    # 10 files per page
+    
+    page_number = request.GET.get('page')   # get the pagenumber
+    page_objs = paginator.get_page(page_number)
+    
+    # fetch all categorries
     categories = Category.objects.all()
     
-    context = {'files' : files, 'categories' : categories, 'search_query' : search_query}
+    context = {
+        'page_objs' : page_objs, 
+        'paginator' : paginator,
+        'categories' : categories, 
+        'search_query' : search_query
+        }
+    
     return render(request, 'fileServer/all_files.html', context)
 
 
@@ -141,40 +172,4 @@ def email_document(request, slug):
 def thank_you(request):
     return render(request, 'fileServer/thank_you.html')
 
-
-def signup_view(request):
-    if request.method == 'POST':
-        form = CustomSignupForm(request.POST)
-        if form.is_valid():
-            form.save(request)
-            return redirect('/')
-    else:
-        form = CustomSignupForm()
-    
-    return render(request, 'account/signup.html', {'form': form})
-
-# def signup_view(request):
-#     if request.method == 'POST':
-#         form = CustomSignupForm(request.POST)
-#         if form.is_valid():
-#             form.save(request)
-#             return redirect('/')
-#     else:
-#         form = CustomSignupForm()
-    
-#     return render(request, 'account/signup.html', {'form':form})
-        
-# register new user function
-# def register_user(request):
-#     if request.method == 'POST':
-#         register_form = NewUserForm(request.POST)
-#         if register_form.is_valid():
-#             user = register_form.save()
-#             login(request, user)
-#             return redirect('/')
-#     else:   
-#         register_form = NewUserForm()
-    
-#     context = {'register_form' : register_form}
-#     return render(request, 'registration/registration.html', context)
     

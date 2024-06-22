@@ -10,6 +10,5 @@ urlpatterns = [
     path('category/<slug:slug>', views.show_file_by_category, name='show_category'),
     path('search/', views.search_file, name='search'),
     path('send_file/<slug:slug>', views.email_document, name='send_file'),
-    path('accounts/signup/', views.signup_view, name='signup'),
     path('thank_you/', views.thank_you, name='thank_you')
 ]

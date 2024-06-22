@@ -79,12 +79,6 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-# # get allauth to use custom login and signup form
-# ACCOUNT_FORM = {
-#     # 'login' : 'accounts.forms.CustomLoginForm',
-#     # 'signup' : 'accounts.forms.CustomSignupForm',
-# }
-
 WSGI_APPLICATION = 'fileServerProject.wsgi.application'
 
 
