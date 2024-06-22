@@ -1,0 +1,20 @@
+{% extends 'base_template.html' %}
+{% block title %}
+  <title>File Server | Verification Sent</title>
+{% endblock %}
+
+{% block content %}
+  <section class="py-4 py-md-5 my-5">
+    <div class="container py-md-5">
+      <div class="row pt-5 pb-4">
+        <div class="col-md-12 col-xl-12 text-center text-md-start">
+          <h2 class="display-6 fw-bold mb-5"><span class="underline pb-1"><strong>Verify Your Email Address</strong></span></h2>
+          <p class="text-muted">
+            <i><em>Confirmation email sent to your email address {{ email }}</em></i>
+          </p>
+          <p class="text-muted">We have sent an email to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification email in your main inbox, check your spam folder. Please contact us if you do not receive the verification email within a few minutes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base_template.html' %}
+{% block title %}
+  <title>File Server | Verification Sent</title>
+{% endblock %}
+
+{% block content %}
+  <section class="py-4 py-md-5 my-5">
+    <div class="container py-md-5">
+      <div class="row pt-5 pb-5 mt-5">
+        <div class="col-md-12 col-xl-12 text-center text-md-start">
+          <h2 class="display-6 fw-bold mb-5"><span class="underline pb-1"><strong>Confirm Email Address</strong></span></h2>
+
+          {% if confirmation %}
+            <p class="text-muted">
+              Please confirm that <a class="fst-italic fw-bold" href="mailto:{{ email }}">{{ email }}</a> is your email.
+            </p>
+            <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+              {% csrf_token %}
+              <div class="pt-2">
+                <button class="btn btn-primary shadow" data-bss-hover-animate="pulse" type="submit">Confirm</button>
+              </div>
+            </form>
+          {% else %}
+            {% url 'account_email' as email_url %}
+            <p>
+              This email confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new email confirmation request</a>.
+            </p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

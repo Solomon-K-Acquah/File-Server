@@ -27,8 +27,8 @@
                         <button class="btn btn-warning btn-lg me-2" type="submit" data-bss-hover-animate="pulse" style="background: rgb(231,181,1);">Logout</button>
                       </form>
                     {% else %}
-                      <a class="btn btn-warning btn-lg me-2" role="button" data-bss-hover-animate="pulse" href="" style="background: rgb(231,181,1);">Login</a>
-                      <a class="btn btn-light btn-lg" role="button" data-bss-hover-animate="pulse" href="">Sign up</a>
+                      <a class="btn btn-warning btn-lg me-2" role="button" data-bss-hover-animate="pulse" href="{% url 'account_login' %}" style="background: rgb(231,181,1);">Login</a>
+                      <a class="btn btn-light btn-lg" role="button" data-bss-hover-animate="pulse" href="{% url 'account_signup' %}">Sign up</a>
                     {% endif %}
                   </div>
                 </div>

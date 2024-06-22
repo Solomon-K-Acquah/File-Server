@@ -144,14 +144,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Allauth configurations
 
-# Allauth configuration
-# ACCOUNT_AUTHENTICATION_METHOD = 'email'
-# ACCOUNT_EMAIL_REQUIRED = True
-# ACCOUNT_USERNAME_REQUIRED = True
-# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Options: 'none', 'optional', 'mandatory'
-# LOGIN_REDIRECT_URL = '/'  # Redirect after successful login
-# LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
-
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
@@ -165,8 +157,6 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = False
 
-# ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 3
-# ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 3600
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 
@@ -185,15 +175,6 @@ ACCOUNT_PASSWORD_INPUT_RENDER_VALUE = False
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
 
-
-#Email settings
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'kofifrankie@gmail.com'
-# EMAIL_HOST_PASSWORD = '#fghfghfgh123'
-
 # Mailtrap SMTP configuration for email testing
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
@@ -202,6 +183,3 @@ EMAIL_HOST_PASSWORD = '359b828921cd80'
 EMAIL_PORT = '2525'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-
-# LOGIN_REDIRECT_URL = '/'
-# LOGOUT_REDIRECT_URL = '/accounts/login/'
