@@ -8,19 +8,47 @@ from django.db.models import Q
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.utils.html import strip_tags
-from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 
 # Create your views here.
 
 # funtion to handle home page view
+# @login_required
 def home_page(request):
     
     # fetch three recent files to the home page
-    files = File.objects.all().order_by('-id')[0:3]
+    recently_added_files = File.objects.order_by('-id')[:3]
     
-    context = {'files' : files }
+    # fetch three most downloaded files to
+    most_downloaded_files = File.objects.order_by('-download_count', '-email_count')[:3]
+    
+    if request.user.is_authenticated:
+        # get the number of direct downloads for a logged in user
+        user = request.user
+        user_download_count = Download.objects.filter(user = user).count()
+        direct_downloads = Download.objects.filter(user = user).select_related('file') # get the files downloaded
+        
+        # get the number of files sent via email by a logged in user
+        user = request.user
+        user_email_files_count = EmailLog.objects.filter(user = user).count()
+        email_downloads = EmailLog.objects.filter(user = user).select_related('file') # get the files downloaded
+        
+        context = {
+        'recently_added_files' : recently_added_files,
+        'most_downloaded_files' : most_downloaded_files,
+        'user_download_count' : user_download_count,
+        'user_email_files_count' : user_email_files_count,
+        'direct_downloads' : direct_downloads,
+        'email_downloads': email_downloads
+        }
+    
+    else:
+        context = {
+            'recently_added_files' : recently_added_files,
+            'most_downloaded_files' : most_downloaded_files,
+            }
+    
     return render(request, 'fileServer/index.html', context)
 
 
@@ -29,7 +57,7 @@ def all_files(request):
     
     # fetch all the file objects in descending order
     files = File.objects.all().order_by('-id')
-    paginator = Paginator(files, 10)     # 10 files per page
+    paginator = Paginator(files, 9)     # 9 files per page
     
     page_number = request.GET.get('page')   # get the page number
     page_objs = paginator.get_page(page_number)
@@ -42,6 +70,7 @@ def all_files(request):
         'paginator' : paginator,
         'categories' : categories
         }
+    
     return render(request, 'fileServer/all_files.html', context)
 
 
@@ -54,7 +83,11 @@ def file_details(request, slug):
     # get file total download, both direct and via email
     total_downloads = file.email_count + file.download_count
     
-    context = {'file' : file, 'total_downloads' : total_downloads}
+    context = {
+        'file' : file, 
+        'total_downloads' : total_downloads
+        }
+    
     return render(request, 'fileServer/details.html', context)
 
 
@@ -87,7 +120,7 @@ def show_file_by_category(request, slug):
     category = get_object_or_404(Category, slug = slug)
     files = File.objects.filter(category_id = category).order_by('-id')
     
-    paginator = Paginator(files, 10)     # 10 files per page
+    paginator = Paginator(files, 9)     # 9 files per page
     page_number = request.GET.get('page')   # get page number
     
     page_objs = paginator.get_page(page_number)
@@ -117,7 +150,7 @@ def search_file(request):
                                 Q(description__icontains = search_query) | 
                                 Q(slug__icontains = search_query))
     
-    paginator = Paginator(files, 10)    # 10 files per page
+    paginator = Paginator(files, 9)    # 9 files per page
     
     page_number = request.GET.get('page')   # get the pagenumber
     page_objs = paginator.get_page(page_number)
@@ -162,7 +195,10 @@ def email_document(request, slug):
     else:
         email_form = SendEmailForm()
     
-    context = {'email_form' : email_form, 'file' : file}
+    context = {
+        'email_form' : email_form, 
+        'file' : file
+        }
     
     return render(request, 'fileServer/email_document.html', context)
 
