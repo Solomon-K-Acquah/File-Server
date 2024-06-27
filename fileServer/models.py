@@ -151,16 +151,6 @@ def delete_files_on_model_delete(sender, instance, **kwargs):
     if instance.image:
         delete_file(instance.image.path)
 
-
-    
-    # def save(self, *args, **kwargs):
-    # try:
-    #     old_instance = YourModel.objects.get(pk=self.pk)
-    # except YourModel.DoesNotExist:
-    #     old_instance = None
-
-    # super().save(*args, **kwargs)
-
 # model class for Download-------------------------------------------
 class Download(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)

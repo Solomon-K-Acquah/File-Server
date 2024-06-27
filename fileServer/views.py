@@ -3,16 +3,14 @@ from django.conf import settings
 from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from fileServer.form import SendEmailForm
-from fileServer.models import Category, Download, EmailLog, File, User
+from fileServer.models import Category, Download, EmailLog, File
 from django.db.models import Q
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.utils.html import strip_tags
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.contrib.admin.views.decorators import staff_member_required
 
-# Create your views here.
 
 # funtion to handle home page view
 def home_page(request):
