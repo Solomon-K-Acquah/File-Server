@@ -37,7 +37,9 @@
                 {% for page_obj in page_objs %}
                   <div class="col">
                     <div>
-                      <img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="{{ page_obj.image.url }}" />
+                      {% if page_obj.image %}
+                        <img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="{{ page_obj.image.url }}" />
+                      {% endif %}
                       <div class="py-4">
                         <h4 class="fw-bold">{{ page_obj.title }}</h4>
                         <p class="text-muted">{{ page_obj.description|truncatechars:40 }}</p>

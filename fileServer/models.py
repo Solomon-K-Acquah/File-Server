@@ -1,7 +1,11 @@
+import os
 from django.db import models
 from django.forms import ValidationError
 from django.utils.text import slugify
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 # Create custom user manager model
 class CustomUserManager(BaseUserManager):
@@ -88,6 +92,11 @@ def validate_file_size(value):
     limit = 5 * 1024 * 1024  # 5 MB limit
     if value.size > limit:
         raise ValidationError(f"Max file size is 5MB")
+
+# Helper function to delete a file from the filesystem.
+def delete_file(path):
+    if os.path.isfile(path):
+        os.remove(path)
     
 class File(models.Model):
     title = models.CharField(max_length=200)
@@ -108,7 +117,49 @@ class File(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.title)
+            
+        # Override the save method to handle file and image updates.
+        try:
+            old_instance = File.objects.get(pk=self.pk)
+        except File.DoesNotExist:
+            old_instance = None
+            
+        super().save(*args, **kwargs)
+        
+        if old_instance:
+            if old_instance.file and old_instance.file != self.file:
+                delete_file(old_instance.file.path)
+            if old_instance.image and old_instance.image != self.image:
+                delete_file(old_instance.image.path)
+        
         return super(File, self).save(*args,**kwargs)
+    
+    # Override the delete method to handle file and image deletions.
+    def delete(self, *args, **kwargs):
+        if self.file:
+            delete_file(self.file.path)
+        if self.image:
+            delete_file(self.image.path)
+        super().delete(*args, **kwargs)
+        
+    
+#Signal to delete files and images after a model instance is deleted.
+@receiver(post_delete, sender=File)
+def delete_files_on_model_delete(sender, instance, **kwargs):
+    if instance.file:
+        delete_file(instance.file.path)
+    if instance.image:
+        delete_file(instance.image.path)
+
+
+    
+    # def save(self, *args, **kwargs):
+    # try:
+    #     old_instance = YourModel.objects.get(pk=self.pk)
+    # except YourModel.DoesNotExist:
+    #     old_instance = None
+
+    # super().save(*args, **kwargs)
 
 # model class for Download-------------------------------------------
 class Download(models.Model):

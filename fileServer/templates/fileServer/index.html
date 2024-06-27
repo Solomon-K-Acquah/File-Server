@@ -56,7 +56,9 @@
           {% for recent_file in recently_added_files %}
             <div class="col">
               <div>
-                <img class="rounded img-fluid d-block w-70 fit-cover" style="height: 200px;" src="{{ recent_file.image.url }}" />
+                {% if recent_file.image %}
+                  <img class="rounded img-fluid d-block w-70 fit-cover" style="height: 200px;" src="{{ recent_file.image.url }}" />
+                {% endif %}
                 <div class="py-4">
                   <h4 class="fw-bold">{{ recent_file.title }}</h4>
                   <p class="text-muted">{{ recent_file.description|truncatechars:50 }}</p>
@@ -91,7 +93,9 @@
           {% for most_downloaded in most_downloaded_files %}
             <div class="col">
               <div>
-                <img class="rounded img-fluid d-block w-70 fit-cover" style="height: 200px;" src="{{ most_downloaded.image.url }}" />
+                {% if most_downloaded.image %}
+                  <img class="rounded img-fluid d-block w-70 fit-cover" style="height: 200px;" src="{{ most_downloaded.image.url }}" />
+                {% endif %}
                 <div class="py-4">
                   <h4 class="fw-bold">{{ most_downloaded.title }}</h4>
                   <p class="text-muted">{{ most_downloaded.description|truncatechars:50 }}</p>
