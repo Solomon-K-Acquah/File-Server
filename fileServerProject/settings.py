@@ -195,7 +195,7 @@ JAZZMIN_SETTINGS = {
     "site_logo": "fileServer/assets/img/site_logo.png",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
-    "login_logo": "Login",
+    "login_logo": 'fileServer/assets/img/site_logo_black.png',
 
     # Logo to use for login form in dark themes (defaults to login_logo)
     "login_logo_dark": None,
