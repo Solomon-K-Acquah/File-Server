@@ -10,9 +10,9 @@
     - [Running the Application](#running-the-application)
 5. [Database Schema](#database-schema)
 6. [API Endpoints](#api-endpoints)
-7. [Deployment](#deployment)
-8. [Contributing](#contributing)
-9. [License](#license)
+7. [User Interface](#user-interface)
+8. [Deployment](#deployment)
+9. [Live Project Link](#live-project-link)
 
 ## Project Overview
 Lizzy runs a business that distributes documents in the likes of wedding cards, admission forms etc. on behalf of various businesses to different users. All have been moving well, but she desires to scale her business. 
@@ -60,12 +60,12 @@ This project aims to develop a digital platform for users to access and download
     
 2. **Create and activate a virtual environment**:
      ```bash
-   - **For Windows**
+   - For Windows
     python -m venv env
     env/Scripts/activate
     ```
     ```bash
-   - ** For Mac**
+   - For Mac
     python3 -m venv env
     source env/bin/activate
     ```
@@ -103,6 +103,53 @@ This project aims to develop a digital platform for users to access and download
     - Admin interface: `http://127.0.0.1:8000/admin`
   
 ## Database Schema
+### File Server ER Diagram
+
+<img src="ER_diagram/File_Server_ER_Diagram.jpg" width=80% alt="ER diagram">
+
+## API Endpoints
+
+### User Authentication
+- `POST /api/register/`: Register a new user.
+- `POST /api/login/`: Log in a user.
+- `POST /api/logout/`: Log out the current user.
+- `POST /api/password_reset/`: Request a password reset.
+- `POST /api/password_reset_confirm/`: Confirm password reset.
+
+### File Management
+- `GET /api/files/`: List all files.
+- `GET /api/files/<slug>/`: Retrieve a specific file.
+- `POST /api/files/`: Upload a new file (Admin only).
+- `POST /api/files/<slug>/send_email/`: Send file to an email address.
+- `GET /api/files/<slug>/download/`: Download a specific file.
+  
+## User Interface
+
+### Frontend UI
+
+<img src="UI_images/frontend_ui.jpg" width=80% alt="frontend UI">
+
+### Backend UI
+
+<img src="UI_images/backend_ui.png" width=80% alt="backend UI">
+
+
+## Deployment
+
+1. **Choose a hosting platform**: (e.g., Heroku, AWS, DigitalOcean).
+2. **Configure settings for production**:
+    - Set `DEBUG=False` in `settings.py`.
+    - Set up allowed hosts.
+    - Configure a production database.
+    - Set up email backend for account verification and password resets.
+3. **Deploy the application**:
+    Follow the deployment guides for your chosen platform to deploy the Django application.
+
+## Live Project Link
+[Link to the deployed project](https://example.com)
+
+
+
 
 
 
