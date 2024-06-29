@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-bup-l1&sfyos(do&h2cddevtlp4j6tjl_%9+zsa6e!%_82$(qa
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '159.223.160.18']
 
 
 # Application definition
@@ -85,10 +85,23 @@ WSGI_APPLICATION = 'fileServerProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# # Development database configuration
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# production database configuration
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'fileserverdb',
+        'USER': 'newuser',
+        'PASSWORD': 'userpassword',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -129,6 +142,8 @@ USE_TZ = True
 
 # STATIC_ROOT = 'static/'
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR/'static'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'upload'
 
