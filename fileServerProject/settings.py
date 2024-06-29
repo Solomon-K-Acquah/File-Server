@@ -14,7 +14,7 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'django-insecure-bup-l1&sfyos(do&h2cddevtlp4j6tjl_%9+zsa6e!%_82$(qa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '159.223.160.18']
 
@@ -185,14 +185,14 @@ ACCOUNT_PASSWORD_INPUT_RENDER_VALUE = False
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
 
-# Mailtrap SMTP configuration for email testing
+# Outlook SMTP configuration for email testing
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
-EMAIL_HOST_USER = '8a8aa1bb8047e3'
-EMAIL_HOST_PASSWORD = '359b828921cd80'
-EMAIL_PORT = '2525'
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_PORT = 587  # or 465 for SSL
+EMAIL_USE_TLS = True  # or EMAIL_USE_SSL = True for port 465
+EMAIL_HOST_USER = 'file_server_project@outlook.com'
+EMAIL_HOST_PASSWORD = 'eqtsmsmvmnsyjxrr'
+DEFAULT_FROM_EMAIL = 'file_server_project@outlook.com'
 
 
 # Jazzmin admin customization settings
