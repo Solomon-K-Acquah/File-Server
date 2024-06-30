@@ -158,5 +158,5 @@ This project aims to develop a digital platform for users to access and download
 
 ### Admin Login Credentials
 
-**Email**: admin@gmail.com.
-**Password**: admin.
+- **Email**: admin@gmail.com.
+- **Password**: admin.
