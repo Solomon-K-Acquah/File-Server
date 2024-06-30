@@ -55,7 +55,7 @@ This project aims to develop a digital platform for users to access and download
 1. **Clone the repository**:
     ```bash
     git clone https://github.com/Solomon-K-Acquah/File-Server.git
-    cd File-Server-master
+    cd File-Server
     ```
     
 2. **Create and activate a virtual environment**:

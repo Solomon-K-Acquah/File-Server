@@ -14,9 +14,10 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'django-insecure-bup-l1&sfyos(do&h2cddevtlp4j6tjl_%9+zsa6e!%_82$(qa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '159.223.160.18']
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['104.248.233.142']
 
 
 # Application definition
