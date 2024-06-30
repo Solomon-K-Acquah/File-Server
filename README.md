@@ -155,3 +155,8 @@ This project aims to develop a digital platform for users to access and download
 [Link to the deployed project](http://104.248.233.142/)
 
 [Admin panel](http://104.248.233.142/admin)
+
+### Admin Login Credentials
+
+**Email**: admin@gmail.com.
+**Password**: admin.
